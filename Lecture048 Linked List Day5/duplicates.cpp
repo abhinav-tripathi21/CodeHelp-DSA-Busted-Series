@@ -41,3 +41,27 @@ Node * uniqueSortedList(Node * head) {
     
     return head; 
 }
+pair<Node *, Node *> splitList(Node *head) {
+        Node* head1_ref1 = head;
+        Node* fast = head;
+        Node* slow = head;
+        // finding the middle and last node
+        while(fast->next != head && fast->next->next != head){
+            slow = slow->next;
+            fast = fast -> next ->next;
+        }
+        Node* head1_ref2 = slow->next;
+        if(fast->next == head){
+            fast->next = head1_ref2;
+        }
+        else{
+            fast->next->next = head1_ref2;
+        }
+        slow->next = head1_ref1;
+        
+        pair<Node*, Node*> ans;
+        ans.first = head1_ref1;
+        ans.second = head1_ref2;
+    
+        return ans;
+    }
